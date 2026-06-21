@@ -44,8 +44,13 @@ def load_seen():
 
 
 def save_seen(seen):
-    with open(SEEN_FILE, "w") as f:
-        json.dump(list(seen), f)
+    with open(SEEN_FILE, "w", encoding="utf-8") as f:
+        json.dump(
+            sorted(list(seen)),
+            f,
+            ensure_ascii=False,
+            indent=2
+        )
 
 
 seen = load_seen()
