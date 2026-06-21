@@ -13,8 +13,6 @@ SEARCHES = [
     {"name": "hulajnoga elektryczna dualtron"},
     {"name": "Axxo"},
     {"name": "Grand Fitness"},
-    {"name": "Eleiko"},
-    {"name": "sztanga Samtek"},
     {"name": "Kukirin G2 Max", "max_price": 1600},
     {"name": "Kukirin G4", "max_price": 2200},
     {"name": "Ausom L2 Max Dual", "max_price": 2200},
