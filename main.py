@@ -81,10 +81,11 @@ with sync_playwright() as p:
 
             offers = page.locator('a[href*="/d/oferta/"]')
 
-            count = min(offers.count(), 10)
+print("Znaleziono ofert:", offers.count())
 
-            for i in range(count):
+count = offers.count()
 
+for i in range(count):
                 offer = offers.nth(i)
 
                 try:
