@@ -1,4 +1,3 @@
-
 import os
 import json
 import re
@@ -39,7 +38,7 @@ def send(msg):
 
 def load_seen():
     if os.path.exists(SEEN_FILE):
-        with open(SEEN_FILE, "r") as f:
+        with open(SEEN_FILE, "r", encoding="utf-8") as f:
             return set(json.load(f))
     return set()
 
@@ -72,7 +71,7 @@ with sync_playwright() as p:
 
             url = f"https://www.olx.pl/oferty/q-{query.replace(' ', '-')}/"
 
-            print(f"Sprawdzam: {query}")
+            print(f"\nSprawdzam: {query}")
 
             page.goto(
                 url,
@@ -82,12 +81,12 @@ with sync_playwright() as p:
 
             offers = page.locator('a[href*="/d/oferta/"]')
 
-total_offers = offers.count()
+            total_offers = offers.count()
 
-print(f"Znaleziono ofert: {total_offers}")
+            print(f"Znaleziono ofert: {total_offers}")
 
-for i in range(total_offers):
-for i
+            for i in range(total_offers):
+
                 offer = offers.nth(i)
 
                 try:
@@ -123,11 +122,14 @@ for i
                 if match:
                     price_text = match.group(0)
 
-                    price = int(
-                        match.group(1)
-                        .replace(" ", "")
-                        .replace(".", "")
-                    )
+                    try:
+                        price = int(
+                            match.group(1)
+                            .replace(" ", "")
+                            .replace(".", "")
+                        )
+                    except:
+                        price = None
 
                 if "max_price" in search:
 
