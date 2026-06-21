@@ -1,4 +1,6 @@
 name: OLX Alert Bot
+permissions:
+  contents: write
 
 on:
   workflow_dispatch:
