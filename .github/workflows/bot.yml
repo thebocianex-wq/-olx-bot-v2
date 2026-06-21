@@ -1,9 +1,11 @@
 name: OLX Alert Bot
+
 permissions:
   contents: write
 
 on:
   workflow_dispatch:
+
   schedule:
     - cron: '*/5 * * * *'
 
@@ -16,11 +18,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           persist-credentials: true
+          fetch-depth: 0
 
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: Install dependencies
         run: |
@@ -40,6 +43,13 @@ jobs:
 
           git add seen.json
 
-          git diff --staged --quiet || git commit -m "update seen.json"
+          if git diff --staged --quiet; then
+            echo "Brak zmian w seen.json"
+            exit 0
+          fi
 
-          git push
+          git commit -m "update seen.json"
+
+          git pull --rebase origin main
+
+          git push origin main
